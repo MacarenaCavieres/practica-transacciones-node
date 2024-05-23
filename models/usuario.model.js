@@ -42,7 +42,7 @@ const putOne = async (first_name, last_name, email, saldo) => {
     };
 
     const { rows } = await pool.query(query);
-    return rows[0];
+    return rows;
 };
 
 export const User = {

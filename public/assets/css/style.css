@@ -3,23 +3,18 @@ body {
     color: #fffae6;
 }
 
-.table {
-    width: 50%;
-    margin: 0 auto;
-}
-
-.container {
-    padding: 0;
-}
-
-.row {
-    padding: 0;
-}
-
-.col-12 {
-    padding: 0;
-}
-
 #modal {
     color: #000000;
+}
+
+.table-one {
+    width: 70%;
+    margin-left: 1rem;
+}
+
+.table-two {
+    margin-left: 2rem;
+    margin-right: 3rem;
+    padding: 1rem;
+    width: 80%;
 }

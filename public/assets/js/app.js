@@ -1,8 +1,10 @@
 const url = "/api/v1";
 const tBody = document.querySelector("#tBody");
+const tBodyTrans = document.querySelector("#tBodyTrans");
 const formUsuarios = document.querySelector("#formUsuarios");
 const formOne = document.querySelector("#formOne");
 const formEdit = document.querySelector("#formEdit");
+const formTrans = document.querySelector("#formTrans");
 
 const myModal = new bootstrap.Modal(document.getElementById("modal"));
 
@@ -81,7 +83,8 @@ formUsuarios.addEventListener("submit", async (e) => {
     const email = e.target.email.value;
     const saldo = e.target.saldo.value;
 
-    if (!first_name || !last_name || !email || !saldo) return alert("Todos los campos obligatorios");
+    if (!first_name.trim() || !last_name.trim() || !email.trim() || !saldo.trim())
+        return alert("Todos los campos obligatorios");
 
     try {
         await axios.post(url + "/usuarios", {
@@ -90,6 +93,7 @@ formUsuarios.addEventListener("submit", async (e) => {
             email,
             saldo,
         });
+        alert("Usuario agregado");
         getUsers();
     } catch (error) {
         console.error("Error front===> ", error);
@@ -138,13 +142,14 @@ const updateOne = async (email) => {
 
         if (!first_name || !last_name || !email_user || !saldo) return alert("Todos los campos obligatorios");
 
-        await axios.put(url + `/usuarios/${email}`, {
+        const { data } = await axios.put(url + `/usuarios/${email}`, {
             first_name,
             last_name,
             email: email_user,
             saldo,
         });
-        getUsers();
+
+        printUsers(data);
         myModal.hide();
         alert("Usuario editado");
     } catch (error) {
@@ -154,3 +159,65 @@ const updateOne = async (email) => {
 };
 
 getUsers();
+
+// -----------------------transacciones-----------------------
+
+const getTrans = async () => {
+    try {
+        const { data } = await axios.get(url + "/transacciones");
+        printTrans(data);
+    } catch (error) {
+        console.error("Error front===> ", error);
+        return alert("Ups... algo salio mal");
+    }
+};
+
+const printTrans = (data) => {
+    tBodyTrans.textContent = "";
+
+    data.forEach((item) => {
+        const tr = document.createElement("tr");
+        const tdID = document.createElement("td");
+        const tdOrigin = document.createElement("td");
+        const tdAmount = document.createElement("td");
+        const tdDestination = document.createElement("td");
+
+        tdID.textContent = item.id;
+        tdOrigin.textContent = item.email_origen;
+        tdAmount.textContent = item.monto_transferencia;
+        tdDestination.textContent = item.email_destino;
+
+        tr.appendChild(tdID);
+        tr.appendChild(tdOrigin);
+        tr.appendChild(tdAmount);
+        tr.appendChild(tdDestination);
+
+        tBodyTrans.appendChild(tr);
+    });
+};
+
+formTrans.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email_origen = e.target.email_origen.value;
+    const monto_transferencia = e.target.monto_transferencia.value;
+    const email_destino = e.target.email_destino.value;
+
+    if (!email_origen.trim() || !monto_transferencia.trim() || !email_destino.trim())
+        return alert("Todos los campos obligatorios");
+
+    try {
+        await axios.post(url + "/transacciones", {
+            email_origen,
+            monto_transferencia,
+            email_destino,
+        });
+
+        getTrans();
+    } catch (error) {
+        console.error("Error front===> ", error);
+        return alert("Ups... algo salio mal");
+    }
+});
+
+getTrans();

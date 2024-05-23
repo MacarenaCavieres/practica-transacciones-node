@@ -45,7 +45,7 @@
 
                 <section class="col-12 col-md-4 m-2">
                     <h2 class="container mb-3">Formulario Transacciones</h2>
-                    <form class="p-3 border rounded">
+                    <form class="p-3 border rounded" id="formTrans">
                         <label class="form-label" for="email_origen">Ingrese su mail</label>
                         <input class="form-control" type="email" name="email_origen" placeholder="Mail" />
                         <label class="form-label mt-2" for="monto_transferencia"
@@ -81,10 +81,13 @@
                 </section>
             </div>
         </main>
-        <section class="container">
+        <section class="container-fluid">
             <div class="row">
-                <div class="col-12 col-md-6">
-                    <table class="table table-secondary table-striped table-hover mt-3">
+                <div class="col-12 col-md-7 table-container">
+                    <h2 class="ms-5">Usuarios</h2>
+                    <table
+                        class="table table-one table-responsive table-secondary table-striped table-hover mt-3"
+                    >
                         <thead>
                             <tr>
                                 <th scope="col">Nombre</th>
@@ -100,6 +103,29 @@
                                 <td>Otto</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
+                                <td><button>Editar</button> <button>Eliminar</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-12 col-md-5 table-container">
+                    <h2 class="ms-5">Transacciones</h2>
+                    <table
+                        class="table table-two table-responsive table-secondary table-striped table-hover mt-3"
+                    >
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Mail origen</th>
+                                <th scope="col">Monto</th>
+                                <th scope="col">Mail destino</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tBodyTrans">
+                            <tr>
+                                <td>1</td>
+                                <td>Mark</td>
+                                <td>Otto</td>
                                 <td>@mdo</td>
                             </tr>
                         </tbody>

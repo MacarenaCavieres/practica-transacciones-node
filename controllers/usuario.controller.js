@@ -22,7 +22,7 @@ const postOneUser = async (req, res) => {
 
         const data = await User.postOne(first_name, last_name, email, saldo);
 
-        if (!data) return res.status(400).json({ ok: false, msg: "Algo salio mal" });
+        if (!data) return res.status(500).json({ ok: false, msg: "Algo salio mal" });
         return res.status(201).json(data);
     } catch (error) {
         console.error("Error==> ", error);
