@@ -14,9 +14,9 @@
     </head>
     <body>
         <h1 class="text-center my-5">Banco Cnd</h1>
-        <main class="container">
-            <div class="d-flex justify-content-center">
-                <section class="col-12 col-md-6 m-2">
+        <main class="container-fluid">
+            <div class="row d-flex justify-content-center">
+                <section class="col-12 col-md-4 m-2">
                     <h2 class="container mb-3">Formulario de usuario</h2>
                     <form class="p-3 border rounded" id="formUsuarios">
                         <label class="form-label" for="first_name">Ingrese su nombre</label>
@@ -43,7 +43,7 @@
                     </form>
                 </section>
 
-                <section class="col-12 col-md-6 m-2">
+                <section class="col-12 col-md-4 m-2">
                     <h2 class="container mb-3">Formulario Transacciones</h2>
                     <form class="p-3 border rounded">
                         <label class="form-label" for="email_origen">Ingrese su mail</label>
@@ -56,10 +56,27 @@
                             type="number"
                             name="monto_transferencia"
                             placeholder="Monto"
+                            required
                         />
                         <label class="form-label mt-2" for="email_destino">Ingrese email destino</label>
-                        <input class="form-control" type="email" name="email_destino" placeholder="Mail" />
+                        <input
+                            class="form-control"
+                            type="email"
+                            name="email_destino"
+                            placeholder="Mail"
+                            required
+                        />
                         <button type="submit" class="btn btn-primary mt-3">Transferir</button>
+                    </form>
+                </section>
+
+                <section class="col-12 col-md-3 m-2">
+                    <h2 class="container mb-3">Consultar usuario</h2>
+                    <form class="p-3 border rounded" id="formOne">
+                        <label class="form-label" for="email">Ingrese mail</label>
+                        <input class="form-control" type="email" name="email" placeholder="Mail" required />
+
+                        <button type="submit" class="btn btn-primary mt-3">Consultar</button>
                     </form>
                 </section>
             </div>

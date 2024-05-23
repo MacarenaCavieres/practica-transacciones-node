@@ -1,6 +1,7 @@
 const url = "/api/v1";
 const tBody = document.querySelector("#tBody");
 const formUsuarios = document.querySelector("#formUsuarios");
+const formOne = document.querySelector("#formOne");
 
 const getUsers = async () => {
     try {
@@ -37,6 +38,15 @@ const printUsers = (data) => {
         btnEdit.classList.add("btn", "btn-warning", "btn-editar", "mb-2");
         btnDelete.classList.add("btn", "btn-danger", "btn-eliminar");
 
+        btnEdit.dataset.email = item.email;
+        btnDelete.dataset.email = item.email;
+
+        btnDelete.addEventListener("click", (e) => {
+            if (confirm("¿Seguro quieres eliminar este usuario?")) {
+                removeOne(e.target.dataset.email);
+            }
+        });
+
         tdbtnes.appendChild(btnEdit);
         tdbtnes.appendChild(btnDelete);
 
@@ -72,5 +82,32 @@ formUsuarios.addEventListener("submit", async (e) => {
         return alert("Ups... algo salio mal");
     }
 });
+
+formOne.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = e.target.email.value;
+    if (!email) return alert("Campo obligatorio");
+
+    try {
+        const { data } = await axios.get(url + `/usuarios/${email}`);
+
+        printUsers(data);
+    } catch (error) {
+        console.error("Error front===> ", error);
+        return alert("Ups... algo salio mal");
+    }
+});
+
+const removeOne = async (email) => {
+    try {
+        await axios.delete(url + `/usuarios/${email}`);
+        getUsers();
+        alert("Usuario eliminado");
+    } catch (error) {
+        console.error("Error front===> ", error);
+        return alert("Ups... algo salio mal");
+    }
+};
 
 getUsers();

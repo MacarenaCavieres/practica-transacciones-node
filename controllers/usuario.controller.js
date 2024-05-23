@@ -22,9 +22,43 @@ const postOneUser = async (req, res) => {
 
         const data = await User.postOne(first_name, last_name, email, saldo);
 
-        if (!data) throw new Error("Ups... algo salio mal");
-
+        if (!data) return res.status(400).json({ ok: false, msg: "Algo salio mal" });
         return res.status(201).json(data);
+    } catch (error) {
+        console.error("Error==> ", error);
+        const { code, msg } = handleErrors(error);
+        return res.status(code).json({ ok: false, msg });
+    }
+};
+
+const getOneUser = async (req, res) => {
+    try {
+        const { email } = req.params;
+
+        if (!email) return res.status(400).json({ ok: false, msg: "Algo salio mal" });
+
+        const data = await User.getOne(email);
+
+        if (!data) return res.status(404).json({ ok: false, msg: "Usuario no encontrado" });
+
+        return res.json(data);
+    } catch (error) {
+        console.error("Error==> ", error);
+        const { code, msg } = handleErrors(error);
+        return res.status(code).json({ ok: false, msg });
+    }
+};
+
+const deleteOneUser = async (req, res) => {
+    try {
+        const { email } = req.params;
+        if (!email) return res.status(400).json({ ok: false, msg: "Algo salio mal" });
+
+        const data = await User.deleteOne(email);
+
+        if (!data) return res.status(404).json({ ok: false, msg: "Usuario no encontrado" });
+
+        return res.json(data);
     } catch (error) {
         console.error("Error==> ", error);
         const { code, msg } = handleErrors(error);
@@ -35,4 +69,6 @@ const postOneUser = async (req, res) => {
 export const UserMethod = {
     getAllUsers,
     postOneUser,
+    getOneUser,
+    deleteOneUser,
 };
