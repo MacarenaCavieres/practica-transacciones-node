@@ -7,5 +7,6 @@ router.get("/", UserMethod.getAllUsers);
 router.get("/:email", UserMethod.getOneUser);
 router.post("/", UserMethod.postOneUser);
 router.delete("/:email", UserMethod.deleteOneUser);
+router.put("/:email", UserMethod.putOneUser);
 
 export default router;

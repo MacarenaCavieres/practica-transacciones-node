@@ -66,9 +66,30 @@ const deleteOneUser = async (req, res) => {
     }
 };
 
+const putOneUser = async (req, res) => {
+    try {
+        const { email } = req.params;
+        const { first_name, last_name, saldo } = req.body;
+
+        if (!first_name || !last_name || !email || !saldo)
+            return res.status(400).json({ ok: false, msg: "Datos incompletos" });
+
+        const data = await User.putOne(first_name, last_name, email, saldo);
+
+        if (!data) return res.status(404).json({ ok: false, msg: "Usuario no encontrado" });
+
+        return res.json(data);
+    } catch (error) {
+        console.error("Error==> ", error);
+        const { code, msg } = handleErrors(error);
+        return res.status(code).json({ ok: false, msg });
+    }
+};
+
 export const UserMethod = {
     getAllUsers,
     postOneUser,
     getOneUser,
     deleteOneUser,
+    putOneUser,
 };

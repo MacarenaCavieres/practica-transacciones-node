@@ -35,9 +35,20 @@ const deleteOne = async (email) => {
     return rows[0];
 };
 
+const putOne = async (first_name, last_name, email, saldo) => {
+    const query = {
+        text: "update usuarios set first_name = $1, last_name = $2, email = $3, saldo = $4 where email = $3 returning *",
+        values: [first_name, last_name, email, saldo],
+    };
+
+    const { rows } = await pool.query(query);
+    return rows[0];
+};
+
 export const User = {
     getAll,
     postOne,
     getOne,
     deleteOne,
+    putOne,
 };

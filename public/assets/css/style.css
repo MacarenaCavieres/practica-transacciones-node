@@ -19,3 +19,7 @@ body {
 .col-12 {
     padding: 0;
 }
+
+#modal {
+    color: #000000;
+}
