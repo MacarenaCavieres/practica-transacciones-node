@@ -33,7 +33,19 @@ const postOne = async (email_origen, monto_transferencia, email_destino) => {
     }
 };
 
+const getOne = async (email) => {
+    const query = {
+        text: "select * from transacciones where email_origen = $1 or email_destino = $1 limit 20",
+        values: [email],
+    };
+
+    const { rows } = await pool.query(query);
+
+    return rows;
+};
+
 export const Trans = {
     getAll,
     postOne,
+    getOne,
 };

@@ -3,6 +3,7 @@ const tBody = document.querySelector("#tBody");
 const tBodyTrans = document.querySelector("#tBodyTrans");
 const formUsuarios = document.querySelector("#formUsuarios");
 const formOne = document.querySelector("#formOne");
+const formOneTrans = document.querySelector("#formOneTrans");
 const formEdit = document.querySelector("#formEdit");
 const formTrans = document.querySelector("#formTrans");
 
@@ -214,6 +215,23 @@ formTrans.addEventListener("submit", async (e) => {
         });
 
         getTrans();
+    } catch (error) {
+        console.error("Error front===> ", error);
+        return alert("Ups... algo salio mal");
+    }
+});
+
+formOneTrans.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = e.target.email.value;
+
+    if (!email.trim()) return alert("Campo obligatorio");
+
+    try {
+        const { data } = await axios.get(url + `/transacciones/${email}`);
+
+        printTrans(data);
     } catch (error) {
         console.error("Error front===> ", error);
         return alert("Ups... algo salio mal");

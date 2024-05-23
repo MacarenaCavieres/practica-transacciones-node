@@ -32,7 +32,26 @@ const postOneTrans = async (req, res) => {
     }
 };
 
+const getOneTrans = async (req, res) => {
+    try {
+        const { email } = req.params;
+
+        if (!email) return res.status(400).json({ ok: false, msg: "Datos incompletos" });
+
+        const data = await Trans.getOne(email);
+
+        if (!data) return res.status(400).json({ ok: false, msg: "No se encontro transacción" });
+
+        return res.json(data);
+    } catch (error) {
+        console.error("Error==> ", error);
+        const { code, msg } = handleErrors(error);
+        return res.status(code).json({ ok: false, msg });
+    }
+};
+
 export const TransMethod = {
     getAllTrans,
     postOneTrans,
+    getOneTrans,
 };

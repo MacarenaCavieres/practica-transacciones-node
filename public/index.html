@@ -14,9 +14,9 @@
     </head>
     <body>
         <h1 class="text-center my-5">Banco Cnd</h1>
-        <main class="container-fluid">
+        <main class="container">
             <div class="row d-flex justify-content-center">
-                <section class="col-12 col-md-4 m-2">
+                <section class="col-12 col-md-5 m-2">
                     <h2 class="container mb-3">Formulario de usuario</h2>
                     <form class="p-3 border rounded" id="formUsuarios">
                         <label class="form-label" for="first_name">Ingrese su nombre</label>
@@ -43,7 +43,7 @@
                     </form>
                 </section>
 
-                <section class="col-12 col-md-4 m-2">
+                <section class="col-12 col-md-5 m-2">
                     <h2 class="container mb-3">Formulario Transacciones</h2>
                     <form class="p-3 border rounded" id="formTrans">
                         <label class="form-label" for="email_origen">Ingrese su mail</label>
@@ -69,10 +69,20 @@
                         <button type="submit" class="btn btn-primary mt-3">Transferir</button>
                     </form>
                 </section>
-
-                <section class="col-12 col-md-3 m-2">
+            </div>
+            <div class="row d-flex justify-content-center">
+                <section class="col-12 col-md-5 m-2">
                     <h2 class="container mb-3">Consultar usuario</h2>
                     <form class="p-3 border rounded" id="formOne">
+                        <label class="form-label" for="email">Ingrese mail</label>
+                        <input class="form-control" type="email" name="email" placeholder="Mail" required />
+
+                        <button type="submit" class="btn btn-primary mt-3">Consultar</button>
+                    </form>
+                </section>
+                <section class="col-12 col-md-5 m-2">
+                    <h2 class="container mb-3">Consultar transacción</h2>
+                    <form class="p-3 border rounded" id="formOneTrans">
                         <label class="form-label" for="email">Ingrese mail</label>
                         <input class="form-control" type="email" name="email" placeholder="Mail" required />
 
@@ -83,7 +93,7 @@
         </main>
         <section class="container-fluid">
             <div class="row">
-                <div class="col-12 col-md-7 table-container">
+                <div class="col-12 col-md-6 table-container">
                     <h2 class="ms-5">Usuarios</h2>
                     <table
                         class="table table-one table-responsive table-secondary table-striped table-hover mt-3"
@@ -108,7 +118,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-12 col-md-5 table-container">
+                <div class="col-12 col-md-6 table-container two">
                     <h2 class="ms-5">Transacciones</h2>
                     <table
                         class="table table-two table-responsive table-secondary table-striped table-hover mt-3"
