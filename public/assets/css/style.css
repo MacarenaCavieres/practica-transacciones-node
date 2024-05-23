@@ -1,0 +1,21 @@
+body {
+    background-color: #344c64;
+    color: #fffae6;
+}
+
+.table {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.container {
+    padding: 0;
+}
+
+.row {
+    padding: 0;
+}
+
+.col-12 {
+    padding: 0;
+}
