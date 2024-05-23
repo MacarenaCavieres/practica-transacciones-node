@@ -16,6 +16,13 @@ const postOne = async (email_origen, monto_transferencia, email_destino) => {
 
         await pool.query(query1);
 
+        const query3 = {
+            text: "update usuarios set saldo = saldo + $1 where email = $2",
+            values: [monto_transferencia, email_destino],
+        };
+
+        await pool.query(query3);
+
         const query2 = {
             text: "insert into transacciones (email_origen, monto_transferencia, email_destino) values ($1,$2,$3) returning *",
             values: [email_origen, monto_transferencia, email_destino],

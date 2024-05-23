@@ -215,6 +215,7 @@ formTrans.addEventListener("submit", async (e) => {
         });
 
         getTrans();
+        getUsers();
     } catch (error) {
         console.error("Error front===> ", error);
         return alert("Ups... algo salio mal");
@@ -232,6 +233,7 @@ formOneTrans.addEventListener("submit", async (e) => {
         const { data } = await axios.get(url + `/transacciones/${email}`);
 
         printTrans(data);
+        getUsers();
     } catch (error) {
         console.error("Error front===> ", error);
         return alert("Ups... algo salio mal");
